@@ -3,6 +3,9 @@ from flet import (UserControl)
 class MenuBar(UserControl):
     def __init__(self):
         super().__init__()
+
+        self.panel_on = True
+
         self.menubar = ft.MenuBar(
             style=ft.MenuStyle(
                 alignment=ft.alignment.top_left,
@@ -44,7 +47,7 @@ class MenuBar(UserControl):
                         ft.MenuItemButton(
                             content=ft.Text("Turn -> off",color=ft.colors.BLUE_GREY_200),
                             leading=ft.Icon(ft.icons.EDIT_NOTE),
-                            on_click=self.bt_click,
+                            on_click=self.bt_panel,
                             style=ft.ButtonStyle(
                                 bgcolor={ft.MaterialState.HOVERED: ft.colors.BLUE_GREY}
                             ),
@@ -56,3 +59,11 @@ class MenuBar(UserControl):
 
     def bt_click(self,e):
         pass
+    def bt_panel(self,e):
+        if self.panel_on:
+            self.menubar.controls[1].controls[0].content = ft.Text(f"Turn -> on",color=ft.colors.BLUE_GREY_200)
+            self.panel_on = False
+        else:
+            self.menubar.controls[1].controls[0].content = ft.Text("Turn -> off", color=ft.colors.BLUE_GREY_200)
+            self.panel_on = True
+        self.update()
