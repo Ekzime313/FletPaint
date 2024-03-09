@@ -57,6 +57,7 @@ class LineTool(Tool):
                 end_x,
                 end_y,
                 paint=ft.Paint(
+                    color=kwargs["color"],
                     stroke_width=3
                 )
             )

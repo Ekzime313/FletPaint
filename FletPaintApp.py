@@ -4,6 +4,7 @@ from flet import Container
 from holst import Holst
 from menubar import MenuBar
 from sidebar import SideBar
+from flet_contrib.color_picker import ColorPicker
 
 TITLE: Final[str] = "Flet Paint"
 
@@ -12,9 +13,11 @@ class PaintApp():
         self.page = page
         self.page.title = TITLE
 
-        self.holst = Holst()
+        self.color_picker = ColorPicker("#000000")
+
+        self.holst = Holst(color_picker=self.color_picker)
+        self.sidebar = SideBar(color_picker=self.color_picker)
         self.menubar = MenuBar()
-        self.sidebar = SideBar()
 
         self.build()
 
