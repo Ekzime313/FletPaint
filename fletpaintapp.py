@@ -5,6 +5,7 @@ from holst import Holst
 from menubar import MenuBar
 from sidebar import SideBar
 from flet_contrib.color_picker import ColorPicker
+from switchshape import SwitchShape
 
 TITLE: Final[str] = "Flet Paint"
 
@@ -15,9 +16,11 @@ class PaintApp():
 
         self.color_picker = ColorPicker("#000000")
         self.size_list = self.create_size_list()
-
-        self.holst = Holst(color_picker=self.color_picker,size_list=self.size_list)
-        self.sidebar = SideBar(color_picker=self.color_picker,size_list=self.size_list)
+        self.switchshape_bt = SwitchShape()
+        self.holst = Holst(color_picker=self.color_picker, size_list=self.size_list)
+        self.sidebar = SideBar(color_picker=self.color_picker,
+                               size_list=self.size_list,
+                               switchshape=self.switchshape_bt)
         self.menubar = MenuBar()
 
         self.build()
