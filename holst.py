@@ -3,12 +3,24 @@ import flet.canvas as cv
 from Tools import LineTool, State
 from flet_contrib.color_picker import ColorPicker
 class Holst(ft.UserControl):
-    def __init__(self, color_picker:ColorPicker,color="#000000",tool=LineTool()):
+    def __init__(self,
+                 color_picker: ColorPicker,
+                 size_list: ft.Dropdown,
+                 color="#000000",
+                 tool=LineTool()
+                 ):
         super().__init__()
         self.tool = tool
         self.state = State()
         self.color = color
         self.color_picker = color_picker
+        self.size = 3
+
+        if isinstance(size_list, ft.Dropdown):
+            self.size_list = size_list
+        else:
+            raise ValueError("size_list must be either None or an instance of ft.Dropdown")
+
     def build(self):
         # Главный холст для рисования
         self.holst = cv.Canvas(
@@ -34,7 +46,10 @@ class Holst(ft.UserControl):
     def pan_start(self, e: ft.DragStartEvent):
         self.state.x = e.local_x
         self.state.y = e.local_y
+        # Смена цвет на текущий выбраный цвет в color_picker
         self.color = self.color_picker.color
+        # смена размера кисти на выбраный в size_list
+        self.size = self.size_list.value
 
     def pan_update(self, e: ft.DragUpdateEvent):
         self.tool.draw(
@@ -44,7 +59,7 @@ class Holst(ft.UserControl):
             end_x=e.local_x,
             end_y=e.local_y,
             color = self.color,
-            stroke_width=3
+            stroke_width=self.size
         )
         self.state.x = e.local_x
         self.state.y = e.local_y

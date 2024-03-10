@@ -3,10 +3,14 @@ from flet import UserControl
 from flet_contrib.color_picker import ColorPicker
 
 class SideBar(UserControl):
-    def __init__(self,color_picker:ColorPicker):
+    def __init__(self,color_picker:ColorPicker,size_list:ft.Dropdown):
         super().__init__()
 
         self.color_picker = color_picker
+        self.size_list = ft.Container(
+            size_list,
+            padding=10,
+        )
 
         self.sidebar = ft.Container(  # Sidebar container
             self.tabs(),
@@ -26,7 +30,12 @@ class SideBar(UserControl):
                 ft.Tab(
                     tab_content=ft.Icon(ft.icons.COLORIZE),
                     content=ft.Container(
-                        content=self.color_picker
+                        ft.Column(
+                            controls=[
+                                self.color_picker,
+                                self.size_list
+                            ]
+                        )
                     ),
                 ),
                 ft.Tab(
@@ -35,8 +44,8 @@ class SideBar(UserControl):
                 ),
                 ft.Tab(
                     tab_content=ft.Icon(ft.icons.MOVIE),
-                    icon=ft.icons.SETTINGS,
                     content=ft.Text("This is Tab 3"),
                 ),
             ],
         )
+

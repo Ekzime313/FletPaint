@@ -14,9 +14,10 @@ class PaintApp():
         self.page.title = TITLE
 
         self.color_picker = ColorPicker("#000000")
+        self.size_list = self.create_size_list()
 
-        self.holst = Holst(color_picker=self.color_picker)
-        self.sidebar = SideBar(color_picker=self.color_picker)
+        self.holst = Holst(color_picker=self.color_picker,size_list=self.size_list)
+        self.sidebar = SideBar(color_picker=self.color_picker,size_list=self.size_list)
         self.menubar = MenuBar()
 
         self.build()
@@ -48,4 +49,22 @@ class PaintApp():
                 sidebar
             ],
             expand=True
+        )
+
+    def create_size_list(self) -> ft.Dropdown:
+        return ft.Dropdown(
+            width=108,
+            label="size",
+            value="3",
+            options=[
+                ft.dropdown.Option("1"),
+                ft.dropdown.Option("3"),
+                ft.dropdown.Option("5"),
+                ft.dropdown.Option("7"),
+                ft.dropdown.Option("9"),
+                ft.dropdown.Option("11"),
+                ft.dropdown.Option("13"),
+                ft.dropdown.Option("15"),
+                ft.dropdown.Option("17"),
+            ],
         )
