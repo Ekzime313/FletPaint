@@ -14,8 +14,9 @@ class PaintApp():
         self.page = page
         self.page.title = TITLE
 
-        self.color_picker = ColorPicker("#000000")
         self.size_list = self.create_size_list()
+
+        self.color_picker = ColorPicker("#000000")
         self.switchshape_bt = SwitchShape()
         self.holst = Holst(color_picker=self.color_picker, size_list=self.size_list)
         self.sidebar = SideBar(color_picker=self.color_picker,
@@ -53,7 +54,6 @@ class PaintApp():
             ],
             expand=True
         )
-
     def create_size_list(self) -> ft.Dropdown:
         return ft.Dropdown(
             width=108,

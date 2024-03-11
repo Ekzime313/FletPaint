@@ -10,13 +10,11 @@ class SideBar(UserControl):
         super().__init__()
 
         self.switchshape_bt = switchshape
-
         self.color_picker = color_picker
         self.size_list = ft.Container(
             size_list,
             padding=10,
         )
-
         self.sidebar = ft.Container(  # Sidebar container
             self.tabs(),
             bgcolor=ft.colors.BLUE_GREY_700,  # Set background color
@@ -56,4 +54,3 @@ class SideBar(UserControl):
                 ),
             ],
         )
-

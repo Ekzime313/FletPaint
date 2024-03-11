@@ -1,4 +1,4 @@
-class StateDraw:
+class StateDraw: # Хранит значение текущего выбраного метода рисования
     __instance = None
 
     @staticmethod
@@ -10,7 +10,7 @@ class StateDraw:
     def __init__(self):
         self.current_tool = "line"
 
-class StateFlag:
+class StateFlag: # Хранит значение заливки для фигур
     __instance = None
 
     @staticmethod

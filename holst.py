@@ -51,16 +51,22 @@ class Holst(ft.UserControl):
         self.size = self.size_list.value
 
         current_tool = StateDraw.get_instance().current_tool
+        current_tool_flag = StateFlag.get_instance().current_tool_flag
         if current_tool == "line":
             self.start_x = e.local_x
             self.start_y = e.local_y
         elif current_tool == "rect":
-            current_tool_flag = StateFlag.get_instance().current_tool_flag
             self.rectDrawingTool = DrawingTool.RectDrawingTool(canvas=self.holst,
                                                                color=self.color,
-                                                               strocke_width=self.size,
+                                                               stroke_width=self.size,
                                                                fill_flag=current_tool_flag)
             self.rectDrawingTool.on_pan_start(e)
+        elif current_tool == "circle":
+            self.circleDrawingTool = DrawingTool.CircleDrawTool(canvas=self.holst,
+                                                                 color=self.color,
+                                                                 stroke_width=self.size,
+                                                                 fill_flag=current_tool_flag)
+            self.circleDrawingTool.on_pan_start(e)
 
     def pan_update(self, e: ft.DragUpdateEvent):
         current_tool = StateDraw.get_instance().current_tool
@@ -78,3 +84,5 @@ class Holst(ft.UserControl):
             self.start_y = e.local_y
         elif current_tool == "rect":
             self.rectDrawingTool.on_pan_update(e)
+        elif current_tool == "circle":
+            self.circleDrawingTool.on_pan_update(e)
